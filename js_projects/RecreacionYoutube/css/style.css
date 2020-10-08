@@ -1,0 +1,269 @@
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "open Sans", sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+.contenedor{
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(90px, 90px) auto;
+    grid-template-rows: 60px auto;
+    grid-template-areas:    "header header" 
+                            "menu contenido";
+    transition: all 3s ease;
+}
+
+.contenedor.active{
+    grid-template-columns: minmax(300px, 15%) auto; /*definimos el tamaño minimo y el maximo en ese orden*/
+}
+
+/*-- HEADER --*/
+.header{
+    grid-area: header;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /*1fr abarca todo lo que pueda mientras que auto solo es lo que queda*/
+    align-items: center;
+    justify-content: space-between;
+    grid-gap:20px;
+    grid-template-areas: "logo busqueda iconos";
+}
+
+.header .contenedor-logo{
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+}
+.header .contenedor-logo .boton-menu{
+    border:none;
+    padding:10px;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+.header .contenedor-logo .boton-menu:hover{
+    background: #e7e7e7;
+}
+
+.header .contenedor-logo .logo .fas{
+    background: #ff0000;
+    padding: 7px 12px;
+    border-radius: 4px;
+    font-size: 8px;
+    color: #ffff;
+    position: relative;
+    top: -3px;
+    margin-right: 4px;
+}
+.header .contenedor-logo .logo{
+    font-family: 'Bebas Neue', cursive;
+    position: relative;
+    top: 2px;
+}
+
+.header .barra-busqueda{
+    grid-area: busqueda;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .barra-busqueda input{
+    min-width: 60%;
+    padding: 0 15px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+.header .barra-busqueda button{
+    height: 35px;
+    border: 1px solid #ccc;
+    border-left: 0;
+    color: #545454;
+    background: #f8f8f8;
+    padding: 0 25px;
+    cursor: pointer;
+}
+.header .barra-busqueda button:hover{
+    background: #f5f5f5;
+}
+
+.header .botones-header{
+    grid-area: iconos;
+    display: flex;
+    align-items: center;
+}
+.header .botones-header button{
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    padding: 7px 12px;
+    border-radius: 100px;
+    color:#828282;
+    margin-right: 4px;
+    cursor: pointer;
+}
+.header .botones-header button:hover{
+    background: #e7e7e7;
+}
+
+.header .botones-header .avatar{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+.header .botones-header .avatar img{
+    vertical-align: top;
+    width: 100%;
+    border-radius: 100px;
+}
+
+/*-- MENU --*/
+.menu-lateral{
+    grid-area: menu;
+    background: #fff;
+    overflow: hidden;
+}
+
+.menu-lateral a{
+    display: block; /*hace que abarque todo el espacio o renglon*/
+    padding: 15px 35px;
+    color:#000;
+    min-width: 800px;
+}
+.menu-lateral a:hover{
+    background: #e5e5e5;
+}
+
+.menu-lateral a.active{
+    background: #e5e5e5;
+    font-weight: bold;
+}
+
+.menu-lateral .fas{
+    color: #606060;
+    margin-right: 42px;
+    width: 20px;
+    text-align: center;
+}
+
+.menu-lateral a.active .fas{
+    color:#ff0000;
+}
+
+/*Ejemplos para aclarar la diferencia de cuando dejar espacio y cuando no
+  Basicamente si no se deja espacio es como un and se observar en .azul.rojo
+  al tener ambas se convierte en morado
+  si se deja un espacio es como el que va dentro de ese 
+  para observar los ejemplos poner las clases en pagina principal, tendencias y suscripciones
+*/
+.azul.rojo{
+    background: purple;
+}
+.azul{
+    background: blue;
+}
+.rojo{
+    background: red;
+}
+/*Termina ejemplo*/
+
+.menu-lateral hr{
+    margin: 20px 0;
+    border: 1px solid #dfdfdf;
+}
+
+/*Principal*/
+.main{
+    grid-area: contenido;
+    background: #f9f9f9;
+    padding: 40px;
+}
+
+.main .titulo{
+    margin-bottom: 20px;
+}
+
+.main .grid-videos{
+    display: grid;
+    grid-gap: 40px 20px; /*espaciado entre cada elemento de la gridd*/
+    grid-template-columns: repeat(4, 1fr); /*le decimos que queremos 4 columnas y cada una de 1fr*/
+
+}
+
+.main .grid-videos .video,
+.main .grid-videos .video img{
+    width: 100%;
+    display: block;
+}
+/* con lo de arriba ahorramos codigo dandole la misma propiedad a ambos aunque en img no queremos block
+pero espero no pase nada :)
+.main .grid-videos .video img{
+    width: 100%;
+}
+*/
+
+/*-- MediaQueries --*/
+@media screen and (max-width: 1200px){ /*debes dejar espacio en el fuccking parentesis despues de and si no no jala*/
+    .main .grid-videos{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 992px){ /*debes dejar espacio en el fuccking parentesis despues de and si no no jala*/
+    .main .grid-videos{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .header .contenedor-logo .logo span{
+        display: none;
+    }
+    .header .barra-busqueda input{
+        min-width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px){ /*debes dejar espacio en el fuccking parentesis despues de and si no no jala*/
+    .contenedor{
+        grid-template-rows: auto;
+    }
+    .header{
+        padding: 20px;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        grid-template-areas:    "logo iconos"
+                                "busqueda busqueda";
+    }
+    .header .contenedor-logo .logo span{
+        display: inline;
+    }
+    .header .barra-busqueda input{
+        min-width: auto;
+        width: 100%;
+
+    }
+}
+
+@media screen and (max-width: 576px){ /*debes dejar espacio en el fuccking parentesis despues de and si no no jala*/
+    .main .grid-videos{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

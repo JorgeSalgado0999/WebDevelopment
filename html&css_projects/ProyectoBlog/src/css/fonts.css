@@ -1,0 +1,31 @@
+/*Tipografía PT Sans*/
+@font-face {
+    font-family: PTSans-Bold;
+    src: url(../fonts/PT_Sans/PTSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: PTSans-BoldItalic;
+    src: url(../fonts/PT_Sans/PTSans-BoldItalic.ttf);
+}
+
+@font-face {
+    font-family: PTSans-Italic;
+    src: url(../fonts/PT_Sans/PTSans-Italic.ttf);
+}
+
+@font-face {
+    font-family: PTSans-Regular;
+    src: url(../fonts/PT_Sans/PTSans-Regular.ttf);
+}
+
+/*Tipografía Open Sans*/
+@font-face {
+    font-family: OpenSans-Bold;
+    src: url(../fonts/Open_Sans/OpenSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url(../fonts/Open_Sans/OpenSans-Regular.ttf);
+}

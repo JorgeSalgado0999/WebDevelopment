@@ -1,0 +1,133 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-image: url(fondo.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.content{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+}
+
+.content-menu{
+    width: calc(50% - 50px);
+    height: 100vh;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 100px 100%);
+    background: linear-gradient(180deg,#1378b3, #1378b3, #0bc1ea, #1378b3);
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.content-menu:nth-child(1){
+    right: 60px;
+    opacity: 0.4;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 80px 100%);
+}
+
+.content-menu:nth-child(2){
+    right: 30px;
+    opacity: 0.7;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 90px 100%);
+
+}
+
+.pattern{
+    width: calc(50% - 110px);
+    height: calc(100vh - 120px);
+    padding: 60px 0 60px 120px; 
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 80px 100%);
+    background: transparent; /* no hace cambio realmente */
+    background-image: url(nubes.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-main-item{
+    width: 350px;
+    position: relative;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.content-main-item:nth-child(1){
+   transform: translateX(10px);
+}
+
+.content-main-item:nth-child(2){
+    transform: translateX(20px);
+ }
+
+ .content-main-item:nth-child(3){
+    transform: translateX(30px);
+ }
+
+ .content-main-item:nth-child(4){
+    transform: translateX(40px);
+ }
+
+ .content-main-item:nth-child(5){
+    transform: translateX(50px);
+ }
+
+
+.item-content{
+    width: 100%;
+    height: 70px;
+    clip-path: polygon(0 20px, 100% 0, calc(100% - 30px) calc(100% - 10px), 20px 100%);
+    background: #035f82;
+}
+
+.content-main-item h3{
+    padding: 0 30px;
+    width: calc(100% - 60px);
+    padding-top: 15px;
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    top: 0;
+    color: #0bc1ea;
+    font-family: 'Bangers', cursive;
+    Letter-spacing: 2px;
+    font-weight: 100;
+    font-size: 25px;
+    transform: rotate(-1.5deg);
+}
+
+.ns{
+    background: #035f82;
+    position: absolute;
+    top: 0;
+}
+
+.content-main-item:hover{
+    transform: translate(-10px, -10px);
+}
+
+.content-main-item:hover .item-content{
+   background: #fff;
+}
+
+.content-main-item:hover h3{
+    color: #035f82;
+ }
+ .content-main-item:hover .ns{
+    top: 10px;
+    left: 10px;
+    background: #035f82;
+    z-index: -1;
+ }
