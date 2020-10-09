@@ -1,130 +1,82 @@
-const userId = document.getElementById('userId');
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
-const age = document.getElementById('age');
+$('#myCollapsible').collapse({
+	toggle: false,
+});
 
-const addBtn = document.getElementById('addBtn');
-const updateBtn = document.getElementById('updateBtn');
-const removeBtn = document.getElementById('removeBtn');
+const formulario = document.getElementById('formulario');
+const users = document.getElementById('users');
+const user = document.getElementById('user');
+const name = document.getElementById('name');
+const genre = document.getElementById('genre');
+const emotion = document.getElementById('emotion');
+const peliculas = document.getElementById('movies');
+
+const addBtn = document.getElementById('addMovie');
 
 const database = firebase.database();
-const rootRef = database.ref('J&P');
+let rootRef = database.ref('Default');
 
-addBtn.addEventListener('click', (e) => {
+const escribir = () => {
+	{
+		//console.log(user.value);
+		rootRef = database.ref(user.value);
+		//esto me regresa un json con los datos
+		rootRef.on('value', (snapshot) => {
+			peliculas.innerHTML = '';
+			let ides = Object.keys(snapshot.val()); //De esta forma obtengo los id
+			let index = 0;
+			snapshot.forEach(function (childSnapshot) {
+				var data = childSnapshot.val();
+				// console.log(data);
+				console.log(index);
+				peliculas.innerHTML += `<li class="list-group-item">
+                <b>${data.name}</b>
+                <b class="ides">${ides[index]}</b>
+                <span class="float-right">
+                    <span class="material-icons"> done </span>
+                </span>
+            </li>`;
+				index++;
+			});
+		});
+	}
+};
+
+const agregar = (e) => {
 	e.preventDefault();
 	const autoId = rootRef.push().key;
 	rootRef.child(autoId).set({
-		first_name: firstName.value,
-		last_name: lastName.value,
-		age: age.value,
+		name: name.value,
+		genre: genre.value,
+		emotion: emotion.value,
 	});
+	formulario.reset();
+};
+
+const eliminar = (eliminar) => {
+	peliculas.innerHTML = '';
+	rootRef.child(eliminar).remove();
+	escribir();
+};
+
+user.addEventListener('change', escribir);
+
+addBtn.addEventListener('click', agregar);
+
+document.addEventListener('DOMContentLoaded', () => {
+	peliculas.innerHTML = '';
+	users.reset();
+	formulario.reset();
 });
 
-// addBtn.addEventListener('click', (e) => {
-// 	e.preventDefault();
-// 	database.ref('users' + userId.value).set({
-// 		first_name: firstName.value,
-// 		last_name: lastName.value,
-// 		age: age.value,
-// 	});
-// });
-
-updateBtn.addEventListener('click', (e) => {
+movies.addEventListener('click', (e) => {
 	e.preventDefault();
-	const newData = {
-		age: age.value,
-		first_name: firstName.value,
-		last_name: lastName.value,
-	};
-	//Este código sirve para agregar el mismo elemento a 2 objetos diferentes
-	// const updates = {};
-	// updates['/J&P/' + userId.value] = newData;
-	// updates['/superUsers/' + userId.value] = newData;
-	// database.ref().update(updates);
-
-	rootRef.child(userId.value).update(newData);
+	let elemento = e.target.parentElement.parentElement.childNodes[3].innerHTML;
+	let accion = e.target.innerHTML.trim();
+	switch (accion) {
+		case 'done':
+			eliminar(elemento);
+			break;
+		default:
+			break;
+	}
 });
-
-removeBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-	//rootRef.child(userId.value).remove(); //esto elimina el nodo completo
-	//database.ref('/superUsers/').child(userId.value).remove(); //le estoy diciendo que elimine de la tabla super users;
-	rootRef
-		.child(userId.value)
-		.remove()
-		.then(() => {
-			window.alert('user removed from database');
-		})
-		.catch((error) => {
-			console.error(error);
-		});
-});
-
-// // get events
-// rootRef.on('child_added', (snapshot) => {
-// 	console.log('child(s) added');
-// });
-// rootRef.on('child_removed', (snapshot) => {
-// 	console.log('child(s) remove');
-// });
-// rootRef.on('child_changed', (snapshot) => {
-// 	console.log('child(s) changed');
-// });
-// //este ultimo captura todos los eventos
-// rootRef.on('value', (snapshot) => {
-// 	console.log('an event occured on the database');
-// });
-// // the once method solo funcionará una vez
-// rootRef.once('child_changed', (snapshot) => {
-// 	console.log('child(s) changed');
-// });
-// //this is for check if we can listen events
-// rootRef.child(0).on('child_changed', (snapshot) => {
-// 	console.log('child(s) changed');
-// });
-// //snapshot saves the new changes
-// rootRef.on('value', (snapshot) => {
-// 	console.log(snapshot.val());
-// });
-
-//queries
-//esto me regresa un json con los datos
-// rootRef.orderByKey().on('value', (snapshot) => {
-// 	console.log(snapshot.val());
-// });
-
-// usando queries
-//limitToFirst() && limitToLast() esto me da los primeros n elementos o los ultimos n elementos
-// rootRef
-// 	.orderByKey()
-// 	.limitToFirst(2)
-// 	.on('value', (snapshot) => {
-// 		console.log(snapshot.val());
-// 	});
-
-//los ordenaremos por una key especifica
-//al combinar este con limitTo podemos obtener el valor mas grande o mas pequeño sin tener que buscar nosotros
-// rootRef.orderByChild('age').on('value', (snapshot) => {
-// 	console.log(snapshot.val());
-// });
-
-// equalTo() nos busca valores exactos según por lo que ordenemos da null si no encuntra nada
-// rootRef
-// 	.orderByChild('first_name')
-// 	.equalTo('Paulina Isabel')
-// 	.on('value', (snapshot) => {
-// 		console.log(snapshot.val());
-// 	});
-
-//satrt at busca parametros que inicien con ese valor
-// rootRef
-// 	.orderByChild('first_name')
-// 	.startAt('P')
-// 	.on('value', (snapshot) => {
-// 		console.log(snapshot.val());
-// 	});
-
-//Esto me regresara los datos en la base de datos de communities
-// database.ref('/communities/').orderByValue().on('value', snapshot =>{
-//     console.log(snashot.val());
-// });

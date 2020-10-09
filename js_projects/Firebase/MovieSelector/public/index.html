@@ -3,48 +3,128 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- Compiled and minified CSS -->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<!-- LinkBootstrap -->
 		<link
 			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+			crossorigin="anonymous"
 		/>
+
 		<link rel="stylesheet" href="style.css" />
-		<title>Invitados - Firebase/Database</title>
+		<title>Movie Selector</title>
 	</head>
 	<body>
-		<main>
-			<form action="">
-				<label for="userId">User ID</label><br />
-				<input type="text" name="userId" id="userId" /><br />
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 mt-3">
+					<h1
+						data-toggle="collapse"
+						data-target="#collapseExample"
+						aria-expanded="false"
+						aria-controls="collapseExample"
+					>
+						Movie Selector
+					</h1>
+					<h5 class="collapse" id="collapseExample">
+						This is an aplication made with firebase, this will
+						save all the movies that you want to see and help you
+						to select wich one to see, it will help you through the
+						genre and the priority level you give it to each movie
+					</h5>
+					<h5>By Jorge Salgado</h5>
+				</div>
+				<!-- CierraCol -->
+			</div>
+			<!-- CierraRow -->
+			<div class="row">
+				<div class="col-sm-6 mt-5">
+					<h3>Select an user</h3>
+					<form action="" id="users">
+						<select
+							class="form-control form-control-sm col-5"
+							name=""
+							id="user"
+						>
+							<option value="" disabled selected>
+								-- Select --
+							</option>
+							<option value="Default">Default</option>
+							<option value="J&P">J&P</option>
+							<option value="S&M">S&M</option>
+						</select>
+					</form>
+				</div>
+				<!-- CierraCol -->
+			</div>
+			<!-- CierraRow -->
+			<div class="row justify-content-between mt-3">
+				<div class="col-sm-12 col-md-4">
+					<h3>Add a new movie</h3>
+					<form class="form-group" id="formulario" action="">
+						<input
+							class="col-8 mt-2"
+							type="text"
+							name="name"
+							id="name"
+							placeholder="Movie Name"
+						/>
+						<input
+							class="col-8 mt-2"
+							type="text"
+							name="genre"
+							id="genre"
+							placeholder="Genre"
+						/>
+						<select
+							class="form-control form-control-sm col-8 mt-2"
+							name=""
+							id="emotion"
+						>
+							<option value="" disabled selected>
+								Emotion to see
+							</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
 
-				<label for="firstName">First Name</label><br />
-				<input type="text" name="firstName" id="firstName" /><br />
-
-				<label for="lastName">Last Name</label><br />
-				<input type="text" name="lastName" id="lastName" /><br />
-
-				<label for="age">Age</label><br />
-				<input type="number" name="age" id="age" /><br />
-
-				<button id="addBtn" class="btn waves-effect waves-light">
-					Agregar
-				</button>
-				<button id="updateBtn" class="btn waves-effect waves-light">
-					Actualizar
-				</button>
-				<button id="removeBtn" class="btn waves-effect red darken-1">
-					Eliminar
-				</button>
-			</form>
-		</main>
+						<button
+							type="submit"
+							class="btn btn-primary mt-3"
+							id="addMovie"
+						>
+							Agregar
+						</button>
+					</form>
+				</div>
+				<!-- CierraCol -->
+				<div class="col-sm-12 col-md-7">
+					<h3>Movies to see</h3>
+					<ul class="list-group list-group-flush" id="movies">
+						<li class="list-group-item">
+							<b>Actividad</b>
+							<span class="float-right">
+								<span class="material-icons"> done </span>
+							</span>
+						</li>
+					</ul>
+				</div>
+				<!-- CierraCol -->
+			</div>
+			<!-- CierrRow -->
+		</div>
+		<!-- CierraContainer -->
 
 		<!-- The core Firebase JS SDK is always required and must be listed first -->
 		<script src="https://www.gstatic.com/firebasejs/7.22.1/firebase.js"></script>
-
 		<!-- TODO: Add SDKs for Firebase products that you want to use
     https://firebase.google.com/docs/web/setup#available-libraries -->
 		<script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-analytics.js"></script>
-
 		<script>
 			// Your web app's Firebase configuration
 			// For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -62,6 +142,21 @@
 			firebase.initializeApp(firebaseConfig);
 			firebase.analytics();
 		</script>
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+			integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+			crossorigin="anonymous"
+		></script>
 		<script src="app.js"></script>
 	</body>
 </html>
