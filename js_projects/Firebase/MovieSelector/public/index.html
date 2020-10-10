@@ -41,28 +41,50 @@
 				<!-- CierraCol -->
 			</div>
 			<!-- CierraRow -->
-			<div class="row">
-				<div class="col-sm-6 mt-5">
+			<div class="row justify-content-between">
+				<div class="col-sm-12 col-md-4 mt-5">
 					<h3>Select an user</h3>
 					<form action="" id="users">
 						<select
-							class="form-control form-control-sm col-5"
+							class="form-control form-control-sm col-8"
 							name=""
 							id="user"
 						>
 							<option value="" disabled selected>
 								-- Select --
 							</option>
-							<option value="Default">Default</option>
-							<option value="J&P">J&P</option>
-							<option value="S&M">S&M</option>
+							<!-- <option value="Default" selected>Default</option>
+                                <option value="J&P" selected>J&P</option>-->
 						</select>
 					</form>
 				</div>
 				<!-- CierraCol -->
+				<div class="col-sm-12 col-md-7 mt-5">
+					<h3>Create a new user</h3>
+					<form
+						class="form-inline"
+						id="formularioNuevoUsuario"
+						action=""
+					>
+						<input
+							class="form-control col-5"
+							type="text"
+							name="name"
+							id="userNewName"
+							placeholder="User Name"
+						/>
+						<button
+							type="submit"
+							class="btn btn-primary ml-2"
+							id="addUser"
+						>
+							Agregar
+						</button>
+					</form>
+				</div>
 			</div>
 			<!-- CierraRow -->
-			<div class="row justify-content-between mt-3">
+			<div class="row justify-content-between mt-4">
 				<div class="col-sm-12 col-md-4">
 					<h3>Add a new movie</h3>
 					<form class="form-group" id="formulario" action="">
